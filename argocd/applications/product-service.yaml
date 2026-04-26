@@ -13,7 +13,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/<your-org>/quickart-deploy
+    repoURL: https://github.com/<your-org>/Quickart-deploy
     targetRevision: main
     path: charts/quickart
     helm:
