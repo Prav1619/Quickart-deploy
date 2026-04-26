@@ -1,12 +1,15 @@
-replicaCount: 1
+replicaCount: 2
 
 image:
-  repository: ""
+  repository: prav1619/product-service   # or user-service
   tag: "latest"
 
 service:
-  type: ClusterIP
-  port: 8080
+  type: LoadBalancer
+  port: 8081
+  targetPort: 8081
+
+containerPort: 8081
 
 resources:
   limits:
@@ -15,5 +18,3 @@ resources:
   requests:
     cpu: "200m"
     memory: "256Mi"
-
-env: []
