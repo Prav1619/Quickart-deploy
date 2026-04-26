@@ -17,4 +17,39 @@ resources:
 
 env:
   - name: SPRING_PROFILES_ACTIVE
+    value: devreplicaCount: 2
+
+image:
+  repository: prav1619/user-service
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 8082
+  targetPort: 8082
+
+resources:
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+  requests:
+    cpu: "200m"
+    memory: "256Mi"
+
+env:
+  - name: SPRING_PROFILES_ACTIVE
     value: dev
+
+livenessProbe:
+  httpGet:
+    path: /actuator/health
+    port: 8082
+  initialDelaySeconds: 30
+  periodSeconds: 10
+
+readinessProbe:
+  httpGet:
+    path: /actuator/health
+    port: 8082
+  initialDelaySeconds: 15
+  periodSeconds: 10
