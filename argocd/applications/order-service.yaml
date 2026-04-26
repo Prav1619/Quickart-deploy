@@ -1,1 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: order-service
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: order=prav1619/order-service
+    argocd-image-updater.argoproj.io/order.update-strategy: latest
+    argocd-image-updater.argoproj.io/order.tag-pattern: "^[0-9a-f]{7}$"
+    argocd-image-updater.argoproj.io/write-back-method: git
 
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/Prav1619/Quickart-deploy
+    targetRevision: main
+    path: charts/quickart
+    helm:
+      valueFiles:
+        - ../../environments/dev/order-service.yaml
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: quickart
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
