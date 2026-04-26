@@ -1,1 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: user-service
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: user=prav1619/user-service
+    argocd-image-updater.argoproj.io/user.update-strategy: latest
+    argocd-image-updater.argoproj.io/user.tag-pattern: "^[0-9a-f]{7}$"
+    argocd-image-updater.argoproj.io/write-back-method: git
 
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/Prav1619/Quickart-deploy
+    targetRevision: main
+    path: charts/quickart
+    helm:
+      valueFiles:
+        - ../../environments/dev/user-service.yaml
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: quickart
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
