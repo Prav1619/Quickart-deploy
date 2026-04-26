@@ -1,1 +1,27 @@
+# quickart-deploy/argocd/applications/product-service.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: product-service
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: product=prav1619/product-service
+    argocd-image-updater.argoproj.io/write-back-method: git
 
+spec:
+  source:
+    repoURL: https://github.com/your-org/quickart-deploy
+    targetRevision: main
+    path: charts/quickart
+    helm:
+      valueFiles:
+        - ../../environments/dev/product-service.yaml
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: quickart
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
