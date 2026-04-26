@@ -4,12 +4,15 @@ metadata:
   name: {{ .Release.Name }}
   labels:
     app: {{ .Release.Name }}
+
 spec:
   type: {{ .Values.service.type }}
+
   selector:
     app: {{ .Release.Name }}
+
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.port }}
+    - name: http
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
       protocol: TCP
-      name: http
