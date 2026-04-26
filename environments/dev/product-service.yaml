@@ -1,1 +1,20 @@
+replicaCount: 2
 
+image:
+  repository: prav1619/product-service
+  tag: "latest"
+
+service:
+  port: 8081
+
+resources:
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+  requests:
+    cpu: "200m"
+    memory: "256Mi"
+
+env:
+  - name: SPRING_PROFILES_ACTIVE
+    value: dev
