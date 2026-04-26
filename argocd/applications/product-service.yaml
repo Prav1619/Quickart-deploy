@@ -1,4 +1,3 @@
-# quickart-deploy/argocd/applications/product-service.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -6,11 +5,15 @@ metadata:
   namespace: argocd
   annotations:
     argocd-image-updater.argoproj.io/image-list: product=prav1619/product-service
+    argocd-image-updater.argoproj.io/product.update-strategy: latest
+    argocd-image-updater.argoproj.io/product.tag-pattern: "^[0-9a-f]{7}$"
     argocd-image-updater.argoproj.io/write-back-method: git
 
 spec:
+  project: default
+
   source:
-    repoURL: https://github.com/your-org/quickart-deploy
+    repoURL: https://github.com/<your-org>/quickart-deploy
     targetRevision: main
     path: charts/quickart
     helm:
@@ -25,3 +28,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
