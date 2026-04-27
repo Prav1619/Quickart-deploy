@@ -18,10 +18,10 @@ spec:
   source:
     repoURL: https://github.com/Prav1619/Quickart-deploy
     targetRevision: main
-    path: charts/quickart
+    path: charts/product-service
     helm:
       valueFiles:
-        - environments/dev/product-service.yaml
+        - ../../environments/dev/product-service.yaml
 
   destination:
     server: https://kubernetes.default.svc
