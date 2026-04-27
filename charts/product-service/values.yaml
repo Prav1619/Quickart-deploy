@@ -1,0 +1,19 @@
+replicaCount: 2
+
+image:
+  repository: prav1619/product-service
+  tag: "initial"
+
+service:
+  type: ClusterIP
+  port: 8082
+
+containerPort: 8082
+
+resources:
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+  requests:
+    cpu: "200m"
+    memory: "256Mi"
