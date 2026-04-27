@@ -6,9 +6,9 @@ image:
 
 service:
   type: ClusterIP
-  port: 8082
+  port: 8080
 
-containerPort: 8082
+containerPort: 8080
 
 resources:
   limits:
