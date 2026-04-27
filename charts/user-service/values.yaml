@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: prav1619/user-service
-  tag: "initial"
+  tag: 78e8f08
 
 service:
   type: ClusterIP
