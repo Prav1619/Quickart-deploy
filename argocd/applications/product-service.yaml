@@ -5,15 +5,18 @@ metadata:
   namespace: argocd
   annotations:
     argocd-image-updater.argoproj.io/image-list: product=prav1619/product-service
-    argocd-image-updater.argoproj.io/product.update-strategy: latest
+    argocd-image-updater.argoproj.io/product.update-strategy: newest-build
     argocd-image-updater.argoproj.io/product.tag-pattern: "^[0-9a-f]{7}$"
-    argocd-image-updater.argoproj.io/write-back-method: git
+    argocd-image-updater.argoproj.io/product.write-back-method: git
+    argocd-image-updater.argoproj.io/git-branch: main
+    argocd-image-updater.argoproj.io/product.helm.image-name: image.repository
+    argocd-image-updater.argoproj.io/product.helm.image-tag: image.tag
 
 spec:
   project: default
 
   source:
-    repoURL: https://github.com/<your-org>/Quickart-deploy
+    repoURL: https://github.com/prav1619/Quickart-deploy
     targetRevision: main
     path: charts/quickart
     helm:
