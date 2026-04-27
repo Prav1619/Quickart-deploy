@@ -3,22 +3,17 @@ kind: Application
 metadata:
   name: user-service
   namespace: argocd
-  annotations:
-    argocd-image-updater.argoproj.io/image-list: user=prav1619/user-service
-    argocd-image-updater.argoproj.io/user.update-strategy: latest
-    argocd-image-updater.argoproj.io/user.tag-pattern: "^[0-9a-f]{7}$"
-    argocd-image-updater.argoproj.io/write-back-method: git
-
 spec:
   project: default
 
   source:
     repoURL: https://github.com/Prav1619/Quickart-deploy
     targetRevision: main
-    path: charts/quickart
+    path: charts/user-service
+
     helm:
       valueFiles:
-        - environments/dev/user-service.yaml
+        - ../../environments/dev/user-service.yaml   # 👈 CRITICAL
 
   destination:
     server: https://kubernetes.default.svc
@@ -28,5 +23,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true

@@ -1,0 +1,11 @@
+replicaCount: 2
+
+image:
+  repository: prav1619/user-service
+  tag: latest
+
+service:
+  type: ClusterIP
+  port: 8081
+
+containerPort: 8081
