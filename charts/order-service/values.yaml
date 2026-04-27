@@ -1,0 +1,19 @@
+replicaCount: 2
+
+image:
+  repository: prav1619/order-service
+  tag: "initial"
+
+service:
+  type: ClusterIP
+  port: 8083
+
+containerPort: 8083
+
+resources:
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+  requests:
+    cpu: "200m"
+    memory: "256Mi"
