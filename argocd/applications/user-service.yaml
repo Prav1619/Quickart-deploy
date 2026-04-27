@@ -26,10 +26,10 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: quickart
-    
+
   syncPolicy:
-  automated:
-    prune: true
-    selfHeal: true
-  syncOptions:
-    - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
