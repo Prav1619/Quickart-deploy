@@ -1,15 +1,11 @@
 replicaCount: 1
-
 image:
   repository: prav1619/product-service
-  tag: 78e8f08
-
+  tag: c252c2b7dfeebf27e095f2dc0777601e9fba19a2
 service:
   type: ClusterIP
   port: 8080
-
 containerPort: 8080
-
 resources:
   limits:
     cpu: "200m"
